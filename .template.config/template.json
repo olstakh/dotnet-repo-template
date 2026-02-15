@@ -21,7 +21,8 @@
             "**/bin/**/*",
             "**/obj/**/*",
             "**/*.user",
-            "**/.DS_Store"
+            "**/.DS_Store",
+            "Template/**/*"
           ]
         }
       ]

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageId>AlexStakh.RepoTemplate</PackageId>
+    <Title>.NET Repository Template</Title>
+    <Authors>Alex Stakh</Authors>
+    <Description>A .NET repository template with CPM, transitive pinning, custom Roslyn analyzers, nullables enabled, global.json, recommended defaults and boilerplate projects.</Description>
+    <PackageTags>dotnet-new;template;repository;csharp;cpm;analyzers</PackageTags>
+    <PackageProjectUrl>https://github.com/olstakh/dotnet-repo-template</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/olstakh/dotnet-repo-template</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="**\*" Exclude="**\bin\**;**\obj\**;**\.git\**;**\.vs\**;Template.csproj;**\*.nupkg;**\*.suo;**\*.user" />
+  </ItemGroup>
+
+</Project>
