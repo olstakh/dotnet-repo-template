@@ -30,10 +30,12 @@
   </PropertyGroup>
   -->
 
-  <!-- Source Link (https://github.com/dotnet/sourcelink) -->
+  <!-- Source Link (https://github.com/dotnet/sourcelink) - Only enable in git repos -->
   <PropertyGroup>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Check if we're in a git repository -->
+    <IsGitRepository Condition="Exists('$(MSBuildThisFileDirectory).git')">true</IsGitRepository>
+    <PublishRepositoryUrl Condition="'$(IsGitRepository)' == 'true'">true</PublishRepositoryUrl>
+    <EmbedUntrackedSources Condition="'$(IsGitRepository)' == 'true'">true</EmbedUntrackedSources>
   </PropertyGroup>
 
   <!-- Dependency Rules for ReferenceProtector -->
@@ -41,7 +43,7 @@
     <DependencyRulesFile Condition="'$(DependencyRulesFile)' == ''">$(MSBuildThisFileDirectory)DependencyRules.json</DependencyRulesFile>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(IsGitRepository)' == 'true'">
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 

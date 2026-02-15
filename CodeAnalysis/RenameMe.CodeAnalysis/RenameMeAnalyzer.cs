@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
@@ -16,15 +16,16 @@ namespace RenameMe.CodeAnalysis;
 public sealed class RenameMeAnalyzer : DiagnosticAnalyzer
 {
     internal const string DiagnosticId = "RENAME001";
+    internal const string TemplateDefaultName = "TEMPLATE_DEFAULT_NAME";
 
     private static readonly DiagnosticDescriptor Rule = new(
         id: DiagnosticId,
-        title: "Assembly is still named 'RenameMe'",
-        messageFormat: "Assembly '{0}' should be renamed from the template default 'RenameMe'",
+        title: $"Assembly is still named '{TemplateDefaultName}'",
+        messageFormat: "Assembly '{0}' should be renamed from the template default '{1}'",
         category: "Naming",
         defaultSeverity: DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
-        description: "Assemblies created from the template should be renamed from the default 'RenameMe' name.",
+        description: $"Assemblies created from the template should be renamed from the default '{TemplateDefaultName}' name.",
         customTags: WellKnownDiagnosticTags.CompilationEnd);
 
     /// <inheritdoc />
@@ -43,9 +44,9 @@ public sealed class RenameMeAnalyzer : DiagnosticAnalyzer
     {
         var assemblyName = context.Compilation.AssemblyName;
 
-        if (string.Equals(assemblyName, "RenameMe", System.StringComparison.OrdinalIgnoreCase))
+        if (string.Equals(assemblyName, TemplateDefaultName, System.StringComparison.OrdinalIgnoreCase))
         {
-            var diagnostic = Diagnostic.Create(Rule, Location.None, assemblyName);
+            var diagnostic = Diagnostic.Create(Rule, Location.None, assemblyName, TemplateDefaultName);
             context.ReportDiagnostic(diagnostic);
         }
     }

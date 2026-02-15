@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Alex Stakh",
+  "classifications": [ "Solution", "Repository" ],
+  "identity": "AlexStakh.RepoTemplate",
+  "name": ".NET Repository Template with recommended defaults, custom analyzers and boilerplate projects",
+  "shortName": "repo-template",
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sourceName": "RenameMe",
+  "preferNameDirectory": true,
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            ".git/**/*",
+            ".vs/**/*",
+            "**/bin/**/*",
+            "**/obj/**/*",
+            "**/*.user",
+            "**/.DS_Store"
+          ]
+        }
+      ]
+    }
+  ],
+  "symbols": {
+    "TemplateDefaultName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "TEMPLATE_DEFAULT_NAME",
+      "defaultValue": "RenameMe"
+    }
+  }
+}
