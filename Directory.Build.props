@@ -10,6 +10,8 @@
     <LangVersion>Latest</LangVersion>
     <DebugType>embedded</DebugType>
 
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+
     <!-- Binlog will contain performance info about roslyn analyzers and source generators -->
     <ReportAnalyzer>true</ReportAnalyzer>
 
@@ -41,6 +43,14 @@
   <!-- Versioning (https://github.com/dotnet/Nerdbank.GitVersioning) -->
   <ItemGroup>
     <PackageReference Include="Nerdbank.GitVersioning" PrivateAssets="all" />
-  </ItemGroup> 
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'RenameMe.CodeAnalysis'">
+    <ProjectReference Include="$(RepoRoot)\CodeAnalysis\RenameMe.CodeAnalysis\RenameMe.CodeAnalysis.csproj"
+                      PrivateAssets="all"
+                      ReferenceOutputAssembly="false"
+                      OutputItemType="Analyzer"
+                      Condition="'$(MSBuildProjectExtension)' == '.csproj'" />
+  </ItemGroup>
 
 </Project>
