@@ -36,6 +36,11 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
+  <!-- Dependency Rules for ReferenceProtector -->
+  <PropertyGroup>
+    <DependencyRulesFile Condition="'$(DependencyRulesFile)' == ''">$(MSBuildThisFileDirectory)DependencyRules.json</DependencyRulesFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>

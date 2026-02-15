@@ -4,6 +4,24 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
   </PropertyGroup>
+  <ItemGroup Condition="'$(MSBuildProjectExtension)' == '.csproj'">
+    <GlobalPackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.100">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </GlobalPackageReference>
+    <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.302">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </GlobalPackageReference>
+    <GlobalPackageReference Include="ReferenceTrimmer" Version="3.4.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </GlobalPackageReference>
+    <GlobalPackageReference Include="ReferenceProtector" Version="1.3.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </GlobalPackageReference>  
+  </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
