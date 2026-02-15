@@ -35,7 +35,7 @@ jobs:
       run: dotnet test --configuration Release --no-build --verbosity normal
 
     - name: Pack template
-      run: dotnet pack Template/Template.csproj --configuration Release --output ./artifacts
+      run: dotnet pack Template/RepoTemplate.csproj --configuration Release --output ./artifacts
 
     - name: List packages
       run: ls -la ./artifacts/
@@ -53,7 +53,7 @@ jobs:
         body: |
           ## Installation
           ```bash
-          dotnet new install DotnetRepo.Stakh
+          dotnet new install DotnetRepo-olstakh
           dotnet new repo-template -n MyProject
           ```
 

@@ -22,7 +22,7 @@
             "**/obj/**/*",
             "**/*.user",
             "**/.DS_Store",
-            "**/Template.*"
+            "**/RepoTemplate.*"
           ]
         }
       ]

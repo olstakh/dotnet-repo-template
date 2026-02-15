@@ -25,7 +25,7 @@
   <ItemGroup>
     <!-- Include everything from parent directory, preserving structure -->
     <Content Include="..\**\*"
-             Exclude="..\**\bin\**;..\**\obj\**;..\**\.git\**;..\**\.vs\**;..\Template\**;..\**\*.nupkg;..\**\*.suo;..\**\*.user;..\**\*.swp"
+             Exclude="..\**\bin\**;..\**\obj\**;..\**\.git\**;..\**\.vs\**;..\**\*.nupkg;..\**\*.suo;..\**\*.user;..\**\*.swp;**\RepoTemplate.*"
              PackagePath="content\%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
