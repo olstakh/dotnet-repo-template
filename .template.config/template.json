@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Alex Stakh",
   "classifications": [ "Solution", "Repository" ],
-  "identity": "AlexStakh.RepoTemplate",
+  "identity": "DotnetRepo.Stakh",
   "name": ".NET Repository Template with recommended defaults, custom analyzers and boilerplate projects",
   "shortName": "repo-template",
   "tags": {

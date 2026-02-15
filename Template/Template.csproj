@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <!-- PackageVersion is automatically set by Nerdbank.GitVersioning from version.json -->
-    <PackageId>AlexStakh.RepoTemplate</PackageId>
+    <PackageId>DotnetRepo.Stakh</PackageId>
     <Title>.NET Repository Template</Title>
     <Authors>Alex Stakh</Authors>
     <Description>A .NET repository template with CPM, transitive pinning, custom Roslyn analyzers, nullables enabled, global.json, recommended defaults and boilerplate projects.</Description>
