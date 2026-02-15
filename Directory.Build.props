@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
+    <TargetFramework Condition="'$(TargetFramework)' == ''">net10.0</TargetFramework>
     <RepoRoot>$(MSBuildThisFileDirectory.TrimEnd('\\'))</RepoRoot>
     <Nullable>Enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -8,6 +9,12 @@
     <ImplicitUsings>Enable</ImplicitUsings>
     <LangVersion>Latest</LangVersion>
     <DebugType>embedded</DebugType>
+
+    <!-- Binlog will contain performance info about roslyn analyzers and source generators -->
+    <ReportAnalyzer>true</ReportAnalyzer>
+
+    <TreatWarningsAsErrors Condition=" '$(TreatWarningsAsErrors)' == '' ">false</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild Condition="'$(EnforceCodeStyleInBuild)'==''">true</EnforceCodeStyleInBuild>        
   </PropertyGroup>
 
   <!-- Packaging 
@@ -35,5 +42,5 @@
   <ItemGroup>
     <PackageReference Include="Nerdbank.GitVersioning" PrivateAssets="all" />
   </ItemGroup> 
-   
+
 </Project>
