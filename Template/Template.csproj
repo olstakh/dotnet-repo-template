@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.0.0</PackageVersion>
+    <!-- PackageVersion is automatically set by Nerdbank.GitVersioning from version.json -->
     <PackageId>AlexStakh.RepoTemplate</PackageId>
     <Title>.NET Repository Template</Title>
     <Authors>Alex Stakh</Authors>
@@ -23,7 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="**\*" Exclude="**\bin\**;**\obj\**;**\.git\**;**\.vs\**;Template.csproj;**\*.nupkg;**\*.suo;**\*.user" />
+    <Content Include="..\**\*" Exclude="..\**\bin\**;..\**\obj\**;..\**\.git\**;..\**\.vs\**;..\Template\**;..\**\*.nupkg;..\**\*.suo;..\**\*.user" />
   </ItemGroup>
 
 </Project>
