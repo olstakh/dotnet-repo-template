@@ -4,10 +4,18 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace RenameMe.CodeAnalysis;
 
+/// <summary>
+/// Analyzer that checks if the assembly is still named "RenameMe" and reports a warning if it is.
+/// </summary>
+/// <remarks>
+/// This is a simple example of a Roslyn analyzer that checks for a specific assembly name.
+/// Used as a template for creating custom analyzers in the .NET repository.
+/// The analyzer will report a warning if the assembly name is still "RenameMe", which is the default name when creating a new project from the template. 
+/// </remarks>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class RenameMeAnalyzer : DiagnosticAnalyzer
 {
-    public const string DiagnosticId = "RENAME001";
+    internal const string DiagnosticId = "RENAME001";
 
     private static readonly DiagnosticDescriptor Rule = new(
         id: DiagnosticId,
@@ -16,10 +24,13 @@ public sealed class RenameMeAnalyzer : DiagnosticAnalyzer
         category: "Naming",
         defaultSeverity: DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
-        description: "Assemblies created from the template should be renamed from the default 'RenameMe' name.");
+        description: "Assemblies created from the template should be renamed from the default 'RenameMe' name.",
+        customTags: WellKnownDiagnosticTags.CompilationEnd);
 
+    /// <inheritdoc />
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
+    /// <inheritdoc />
     public override void Initialize(AnalysisContext context)
     {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);

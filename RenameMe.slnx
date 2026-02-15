@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/CodeAnalysis/">
+    <Project Path="CodeAnalysis/RenameMe.CodeAnalysis.Tests/RenameMe.CodeAnalysis.Tests.csproj" />
     <Project Path="CodeAnalysis/RenameMe.CodeAnalysis/RenameMe.CodeAnalysis.csproj" />
   </Folder>
 </Solution>
