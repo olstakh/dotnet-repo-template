@@ -23,28 +23,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Root files -->
-    <Content Include="..\.editorconfig" PackagePath="content\" />
-    <Content Include="..\.gitignore" PackagePath="content\" />
-    <Content Include="..\CLAUDE.md" PackagePath="content\" />
-    <Content Include="..\DependencyRules.json" PackagePath="content\" />
-    <Content Include="..\Directory.Build.props" PackagePath="content\" />
-    <Content Include="..\Directory.Packages.props" PackagePath="content\" />
-    <Content Include="..\global.json" PackagePath="content\" />
-    <Content Include="..\Nuget.config" PackagePath="content\" />
-    <Content Include="..\README.md" PackagePath="content\" />
-    <Content Include="..\version.json" PackagePath="content\" />
-    <Content Include="..\*.slnx" PackagePath="content\" />
-
-    <!-- Template config -->
-    <Content Include="..\.template.config\**\*" PackagePath="content\.template.config\%(RecursiveDir)%(FileName)%(Extension)" />
-
-    <!-- GitHub workflows -->
-    <Content Include="..\.github\**\*" PackagePath="content\.github\%(RecursiveDir)%(FileName)%(Extension)" />
-
-    <!-- Source folders with structure preserved -->
-    <Content Include="..\src\**\*" Exclude="..\src\**\bin\**;..\src\**\obj\**" PackagePath="content\src\%(RecursiveDir)%(FileName)%(Extension)" />
-    <Content Include="..\CodeAnalysis\**\*" Exclude="..\CodeAnalysis\**\bin\**;..\CodeAnalysis\**\obj\**" PackagePath="content\CodeAnalysis\%(RecursiveDir)%(FileName)%(Extension)" />
+    <!-- Include everything from parent directory, preserving structure -->
+    <Content Include="..\**\*"
+             Exclude="..\**\bin\**;..\**\obj\**;..\**\.git\**;..\**\.vs\**;..\Template\**;..\**\*.nupkg;..\**\*.suo;..\**\*.user;..\**\*.swp"
+             PackagePath="content\%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
 </Project>
