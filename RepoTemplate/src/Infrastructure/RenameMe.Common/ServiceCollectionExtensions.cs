@@ -15,9 +15,17 @@ public static class ServiceCollectionExtensions
     /// <returns>The updated service collection.</returns>
     public static IServiceCollection AddBackgroundTasks(this IServiceCollection services)
     {
-        services.AddSingleton<IFireAndForgetProducer, DefaultFireAndForget>();
-        services.AddSingleton<IFireAndForgetConsumer, DefaultFireAndForget>();
-
-        return services;
+        services.AddSingleton<DefaultFireAndForget>();
+        services.AddSingleton<IFireAndForgetProducer>(sp => sp.GetRequiredService<DefaultFireAndForget>());
+        services.AddSingleton<IFireAndForgetConsumer>(sp => sp.GetRequiredService<DefaultFireAndForget>());
+        return services.AddTimeProvider();
     }
+
+    /// <summary>
+    /// Registers a singleton TimeProvider service in the dependency injection container, which can be used for scheduling and timing operations throughout the application.
+    /// </summary>
+    /// <param name="services">The service collection to which the TimeProvider service will be added.</param>
+    /// <returns>The updated service collection.</returns>
+    public static IServiceCollection AddTimeProvider(this IServiceCollection services) =>
+        services.AddSingleton(TimeProvider.System);
 }
