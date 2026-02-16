@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/CodeAnalysis/">
+    <Project Path="CodeAnalysis/RenameMe.CodeAnalysis.Tests/RenameMe.CodeAnalysis.Tests.csproj" />
+    <Project Path="CodeAnalysis/RenameMe.CodeAnalysis/RenameMe.CodeAnalysis.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/RenameMe/RenameMe.csproj" />
+  </Folder>
+  <Folder Name="/src/Infrastructure/">
+    <Project Path="src/Infrastructure/RenameMe.Common/RenameMe.Common.csproj" />
+  </Folder>
+</Solution>

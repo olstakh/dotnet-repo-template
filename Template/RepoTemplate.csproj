@@ -6,7 +6,7 @@
     <PackageId>DotnetRepo-olstakh</PackageId>
     <Title>[Olstakh] .NET Repository Template</Title>
     <Authors>Alex Stakh</Authors>
-    <Description>A .NET repository with recommended defaults</Description>
+    <Description>.NET repository with recommended defaults</Description>
     <PackageTags>dotnet-new;template;repository;csharp;cpm;analyzers</PackageTags>
     <PackageProjectUrl>https://github.com/olstakh/dotnet-repo-template</PackageProjectUrl>
     <RepositoryUrl>https://github.com/olstakh/dotnet-repo-template</RepositoryUrl>
@@ -23,9 +23,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Include everything from parent directory, preserving structure -->
-    <Content Include="..\**\*"
-             Exclude="..\**\bin\**;..\**\obj\**;..\**\.git\**;..\**\.vs\**;..\**\*.nupkg;..\**\*.suo;..\**\*.user;..\**\*.swp;**\RepoTemplate.*"
+    <!-- Include everything from RepoTemplate, preserving structure -->
+    <Content Include="..\RepoTemplate\**\*"
+             Exclude="..\RepoTemplate\**\bin\**;..\RepoTemplate\**\obj\**;..\RepoTemplate\**\.git\**;..\RepoTemplate\**\.vs\**;..\RepoTemplate\**\*.nupkg;..\RepoTemplate\**\*.suo;..\RepoTemplate\**\*.user;..\RepoTemplate\**\*.swp;..\RepoTemplate\**\*.tmp"
              PackagePath="content\%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 

@@ -17,7 +17,7 @@ A comprehensive .NET repository template with best practices, custom Roslyn anal
 ## Installation
 
 ```bash
-dotnet new install AlexStakh.RepoTemplate
+dotnet new install DotnetRepo-olstakh
 ```
 
 ## Usage
