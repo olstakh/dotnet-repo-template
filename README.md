@@ -4,20 +4,20 @@ A comprehensive .NET repository template with best practices, custom Roslyn anal
 
 ## Features
 
-✅ **Central Package Management (CPM)** - Manage all package versions in one place
-✅ **Transitive Pinning** - Pin transitive dependencies for reproducible builds
-✅ **Custom Roslyn Analyzers** - Template includes analyzer project structure and example
-✅ **Nullables Enabled** - Nullable reference types enabled by default
-✅ **Latest C# Language Version** - Always use the latest language features
-✅ **Global.json** - Pin SDK version for consistent builds
-✅ **Nerdbank.GitVersioning** - Automatic semantic versioning from git history
-✅ **SourceLink** - Source debugging support (auto-enabled in git repos)
-✅ **EditorConfig** - Consistent code style across editors
+✅ **Central Package Management (CPM)** - Manage all package versions in one place<br>
+✅ **Transitive Pinning** - Pin transitive dependencies for reproducible builds<br>
+✅ **Custom Roslyn Analyzers** - Template includes analyzer project structure and example<br>
+✅ **Nullables Enabled** - Nullable reference types enabled by default<br>
+✅ **Latest C# Language Version** - Always use the latest language features<br>
+✅ **Global.json** - Pin SDK version for consistent builds<br>
+✅ **Nerdbank.GitVersioning** - Automatic semantic versioning from git history<br>
+✅ **SourceLink** - Source debugging support (auto-enabled in git repos)<br>
+✅ **EditorConfig** - Consistent code style across editors<br>
 
 ## Installation
 
 ```bash
-dotnet new install AlexStakh.RepoTemplate
+dotnet new install DotnetRepo-olstakh
 ```
 
 ## Usage

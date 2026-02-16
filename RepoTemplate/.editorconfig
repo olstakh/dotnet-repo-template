@@ -366,3 +366,17 @@ dotnet_naming_style.s_camelcase.word_separator =
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
 #### Code Analysis ####
+
+# Use .ConfigureAwait(false) when possible
+dotnet_diagnostic.CA2007.severity = suggestion
+# Same as CA2007
+dotnet_diagnostic.MA0004.severity = none
+
+# https://github.com/dotnet/roslyn-analyzers/issues/6561
+# Unused internal class rule. It doesn't handle dependency injection.
+# MA0182 is a better alternative.
+dotnet_diagnostic.CA1812.severity = none
+
+[*Tests.cs]
+# Identifiers should not contain underscores
+dotnet_diagnostic.CA1707.severity = none

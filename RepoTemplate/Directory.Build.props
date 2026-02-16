@@ -9,6 +9,7 @@
     <ImplicitUsings>Enable</ImplicitUsings>
     <LangVersion>Latest</LangVersion>
     <DebugType>embedded</DebugType>
+    <AnalysisMode Condition="'$(AnalysisMode)' == ''">AllEnabledByDefault</AnalysisMode>
 
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
 
