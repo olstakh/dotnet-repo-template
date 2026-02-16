@@ -376,3 +376,7 @@ dotnet_diagnostic.MA0004.severity = none
 # Unused internal class rule. It doesn't handle dependency injection.
 # MA0182 is a better alternative.
 dotnet_diagnostic.CA1812.severity = none
+
+[*Tests.cs]
+# Identifiers should not contain underscores
+dotnet_diagnostic.CA1707.severity = none
