@@ -366,3 +366,9 @@ dotnet_naming_style.s_camelcase.word_separator =
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
 #### Code Analysis ####
+
+# Use .ConfigureAwait(false) when possible
+dotnet_diagnostic.CA2007.severity = suggestion
+# Same as CA2007
+dotnet_diagnostic.MA0004.severity = none
+
