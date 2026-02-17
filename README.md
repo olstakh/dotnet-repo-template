@@ -30,6 +30,13 @@ cd MyAwesomeProject
 dotnet build
 ```
 
+## Template Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `-n \| --name` | string | `RenameMe` | The name for the generated project, used to rename namespaces, projects, and solution files. |
+| `--IncludeAnalyzers` | bool | `true` | If true, includes the CodeAnalysis folder with custom Roslyn analyzer and test projects. |
+
 This creates:
 - `MyAwesomeProject.slnx` - Solution file
 - `src/MyAwesomeProject/` - Main project
