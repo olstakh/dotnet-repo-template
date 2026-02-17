@@ -35,6 +35,7 @@
   <PropertyGroup>
     <!-- Check if we're in a git repository -->
     <IsGitRepository Condition="Exists('$(MSBuildThisFileDirectory).git')">true</IsGitRepository>
+    <IsAzureDevOps Condition="'$(BUILD_REPOSITORY_PROVIDER)' == 'TfsGit'">true</IsAzureDevOps>
     <PublishRepositoryUrl Condition="'$(IsGitRepository)' == 'true'">true</PublishRepositoryUrl>
     <EmbedUntrackedSources Condition="'$(IsGitRepository)' == 'true'">true</EmbedUntrackedSources>
   </PropertyGroup>
@@ -45,7 +46,8 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsGitRepository)' == 'true'">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Condition="'$(IsAzureDevOps)' != 'true'" />
+    <PackageReference Include="Microsoft.SourceLink.AzureDevOpsServer" PrivateAssets="All" Condition="'$(IsAzureDevOps)' == 'true'" />
   </ItemGroup>
 
   <!-- Versioning (https://github.com/dotnet/Nerdbank.GitVersioning) -->
