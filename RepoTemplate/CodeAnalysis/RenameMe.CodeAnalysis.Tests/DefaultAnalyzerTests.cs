@@ -5,15 +5,15 @@ using Microsoft.CodeAnalysis.Testing;
 namespace RenameMe.CodeAnalysis.Tests;
 
 /// <summary>
-/// Tests for the <see cref="DefaultAnalyzer"/> to ensure it correctly identifies when the assembly is still named "RenameMe" and reports the appropriate diagnostics.
+/// Tests for the <see cref="DefaultAnalyzer"/> to ensure it correctly identifies when the assembly still has a default name and reports the appropriate diagnostics.
 /// </summary>
 public class DefaultAnalyzerTests
 {
     /// <summary>
-    /// Tests that a diagnostic is reported when the assembly is named "RenameMe". The test sets up a simple C# code snippet and modifies the project to have the assembly name "RenameMe". It then verifies that the expected diagnostic is reported with the correct message.
+    /// Tests that a diagnostic is reported when the assembly has default name. The test sets up a simple C# code snippet and modifies the project to have the default assembly name. It then verifies that the expected diagnostic is reported with the correct message.
     /// </summary>
     [Fact]
-    public async Task AssemblyNamedRenameMe_ReportsDiagnostic()
+    public async Task AssemblyWithDefaultName_ReportsDiagnostic()
     {
         var test = new CSharpAnalyzerTest<DefaultAnalyzer, DefaultVerifier>
         {
@@ -34,10 +34,10 @@ public class DefaultAnalyzerTests
     }
 
     /// <summary>
-    /// Tests that no diagnostic is reported when the assembly is not named "RenameMe". The
+    /// Tests that no diagnostic is reported when the assembly does not have a default name
     /// </summary>
     [Fact]
-    public async Task AssemblyNotNamedRenameMe_NoDiagnostic()
+    public async Task AssemblyWithoutDefaultName_NoDiagnostic()
     {
         var test = new CSharpAnalyzerTest<DefaultAnalyzer, DefaultVerifier>
         {
