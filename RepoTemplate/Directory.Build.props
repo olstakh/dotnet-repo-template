@@ -53,6 +53,7 @@
     <PackageReference Include="Nerdbank.GitVersioning" PrivateAssets="all" />
   </ItemGroup>
 
+  <!--#if (IncludeAnalyzers) -->
   <ItemGroup Condition="'$(MSBuildProjectName)' != 'RenameMe.CodeAnalysis'">
     <ProjectReference Include="$(RepoRoot)\CodeAnalysis\RenameMe.CodeAnalysis\RenameMe.CodeAnalysis.csproj"
                       PrivateAssets="all"
@@ -60,5 +61,6 @@
                       OutputItemType="Analyzer"
                       Condition="'$(MSBuildProjectExtension)' == '.csproj'" />
   </ItemGroup>
+  <!--#endif -->
 
 </Project>
