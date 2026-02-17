@@ -34,7 +34,7 @@ jobs:
       run: dotnet pack Template/RepoTemplate.csproj --configuration Release --output ./artifacts
 
     - name: Template integration tests
-      run: dotnet test ./tests/Template.IntegrationTests/Template.IntegrationTests.csproj --configuration Release --verbosity normal
+      run: dotnet test --project ./tests/Template.IntegrationTests/Template.IntegrationTests.csproj --configuration Release --verbosity normal
 
     - name: Upload template artifact
       uses: actions/upload-artifact@v4

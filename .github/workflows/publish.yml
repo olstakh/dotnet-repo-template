@@ -38,7 +38,7 @@ jobs:
       run: dotnet test --solution ./RepoTemplate/RenameMe.slnx --configuration Release --no-build --verbosity normal
 
     - name: Template integration tests
-      run: dotnet test ./tests/Template.IntegrationTests/Template.IntegrationTests.csproj --configuration Release --verbosity normal
+      run: dotnet test --project ./tests/Template.IntegrationTests/Template.IntegrationTests.csproj --configuration Release --verbosity normal
 
     - name: Pack template
       run: dotnet pack Template/RepoTemplate.csproj --configuration Release --output ./artifacts
