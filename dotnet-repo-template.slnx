@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Template/">
+    <Project Path="Template/RepoTemplate.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Template.IntegrationTests/Template.IntegrationTests.csproj" />
+  </Folder>
+</Solution>
