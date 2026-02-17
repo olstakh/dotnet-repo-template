@@ -13,7 +13,7 @@ namespace RenameMe.CodeAnalysis;
 /// The analyzer will report a warning if the assembly name is still "RenameMe", which is the default name when creating a new project from the template. 
 /// </remarks>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class RenameMeAnalyzer : DiagnosticAnalyzer
+public sealed class DefaultAnalyzer : DiagnosticAnalyzer
 {
     internal const string DiagnosticId = "RENAME001";
     internal const string TemplateDefaultName = "TEMPLATE_DEFAULT_NAME";

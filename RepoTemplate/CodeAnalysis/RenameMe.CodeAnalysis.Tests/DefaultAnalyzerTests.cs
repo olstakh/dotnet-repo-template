@@ -5,9 +5,9 @@ using Microsoft.CodeAnalysis.Testing;
 namespace RenameMe.CodeAnalysis.Tests;
 
 /// <summary>
-/// Tests for the <see cref="RenameMeAnalyzer"/> to ensure it correctly identifies when the assembly is still named "RenameMe" and reports the appropriate diagnostics.
+/// Tests for the <see cref="DefaultAnalyzer"/> to ensure it correctly identifies when the assembly is still named "RenameMe" and reports the appropriate diagnostics.
 /// </summary>
-public class RenameMeAnalyzerTests
+public class DefaultAnalyzerTests
 {
     /// <summary>
     /// Tests that a diagnostic is reported when the assembly is named "RenameMe". The test sets up a simple C# code snippet and modifies the project to have the assembly name "RenameMe". It then verifies that the expected diagnostic is reported with the correct message.
@@ -15,7 +15,7 @@ public class RenameMeAnalyzerTests
     [Fact]
     public async Task AssemblyNamedRenameMe_ReportsDiagnostic()
     {
-        var test = new CSharpAnalyzerTest<RenameMeAnalyzer, DefaultVerifier>
+        var test = new CSharpAnalyzerTest<DefaultAnalyzer, DefaultVerifier>
         {
             TestCode = "class C { }",
         };
@@ -23,12 +23,12 @@ public class RenameMeAnalyzerTests
         test.SolutionTransforms.Add((solution, projectId) =>
         {
             var project = solution.GetProject(projectId)!;
-            return project.WithAssemblyName(RenameMeAnalyzer.TemplateDefaultName).Solution;
+            return project.WithAssemblyName(DefaultAnalyzer.TemplateDefaultName).Solution;
         });
 
         test.ExpectedDiagnostics.Add(
-            new DiagnosticResult(RenameMeAnalyzer.DiagnosticId, DiagnosticSeverity.Warning)
-                .WithMessage($"Assembly '{RenameMeAnalyzer.TemplateDefaultName}' should be renamed from the template default '{RenameMeAnalyzer.TemplateDefaultName}'"));
+            new DiagnosticResult(DefaultAnalyzer.DiagnosticId, DiagnosticSeverity.Warning)
+                .WithMessage($"Assembly '{DefaultAnalyzer.TemplateDefaultName}' should be renamed from the template default '{DefaultAnalyzer.TemplateDefaultName}'"));
 
         await test.RunAsync(TestContext.Current.CancellationToken);
     }
@@ -39,7 +39,7 @@ public class RenameMeAnalyzerTests
     [Fact]
     public async Task AssemblyNotNamedRenameMe_NoDiagnostic()
     {
-        var test = new CSharpAnalyzerTest<RenameMeAnalyzer, DefaultVerifier>
+        var test = new CSharpAnalyzerTest<DefaultAnalyzer, DefaultVerifier>
         {
             TestCode = "class C { }",
         };
@@ -47,7 +47,7 @@ public class RenameMeAnalyzerTests
         test.SolutionTransforms.Add((solution, projectId) =>
         {
             var project = solution.GetProject(projectId)!;
-            return project.WithAssemblyName(RenameMeAnalyzer.TemplateDefaultName + "MyProject").Solution;
+            return project.WithAssemblyName(DefaultAnalyzer.TemplateDefaultName + "MyProject").Solution;
         });
 
         await test.RunAsync(TestContext.Current.CancellationToken);
