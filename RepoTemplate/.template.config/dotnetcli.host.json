@@ -8,10 +8,6 @@
     "feed": {
       "longName": "feed",
       "shortName": ""
-    },
-    "feedName": {
-      "longName": "feed-name",
-      "shortName": ""
     }
   }
 }

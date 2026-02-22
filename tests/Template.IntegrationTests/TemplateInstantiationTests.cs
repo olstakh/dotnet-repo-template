@@ -87,6 +87,54 @@ public sealed class TemplateInstantiationTests(TemplateFixture fixture) : IClass
     }
 
     /// <summary>
+    /// Custom --feed value should be reflected in the generated Nuget.config.
+    /// </summary>
+    [Fact]
+    public async Task Template_CustomFeed_IsApplied()
+    {
+        var projectName = "TestCustomFeed";
+        var outputDir = Path.Combine(_tempDir.Path, projectName);
+        var customFeed = "https://pkgs.dev.azure.com/myorg/_packaging/myfeed/nuget/v3/index.json";
+
+        // Instantiate the template with a custom feed.
+        var newResult = await DotnetCli.RunAsync(
+            $"new repo-template -n {projectName} -o \"{outputDir}\" --feed {customFeed}");
+        newResult.AssertSuccess("dotnet new failed");
+
+        // Verify Nuget.config contains the custom feed URL.
+        var nugetConfig = await File.ReadAllTextAsync(
+            Path.Combine(outputDir, "Nuget.config"),
+            TestContext.Current.CancellationToken);
+        Assert.Contains(customFeed, nugetConfig);
+        Assert.Contains("DefaultFeed", nugetConfig);
+
+        // Verify the default nuget.org feed is NOT present.
+        Assert.DoesNotContain("https://api.nuget.org/v3/index.json", nugetConfig);
+    }
+
+    /// <summary>
+    /// Default --feed value should produce nuget.org in Nuget.config.
+    /// </summary>
+    [Fact]
+    public async Task Template_DefaultFeed_IsNugetOrg()
+    {
+        var projectName = "TestDefaultFeed";
+        var outputDir = Path.Combine(_tempDir.Path, projectName);
+
+        // Instantiate the template with defaults.
+        var newResult = await DotnetCli.RunAsync(
+            $"new repo-template -n {projectName} -o \"{outputDir}\"");
+        newResult.AssertSuccess("dotnet new failed");
+
+        // Verify Nuget.config contains the default nuget.org feed.
+        var nugetConfig = await File.ReadAllTextAsync(
+            Path.Combine(outputDir, "Nuget.config"),
+            TestContext.Current.CancellationToken);
+        Assert.Contains("https://api.nuget.org/v3/index.json", nugetConfig);
+        Assert.Contains("DefaultFeed", nugetConfig);
+    }
+
+    /// <summary>
     /// The generated project's name should replace all occurrences of "RenameMe".
     /// </summary>
     [Fact]

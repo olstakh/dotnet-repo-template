@@ -54,14 +54,6 @@
       "replaces": "TEMPLATE_NUGET_FEED",
       "displayName": "NuGet feed URL",
       "description": "The NuGet package source feed URL to use in Nuget.config."
-    },
-    "feedName": {
-      "type": "parameter",
-      "datatype": "string",
-      "defaultValue": "DefaultFeed",
-      "replaces": "TEMPLATE_NUGET_FEED_NAME",
-      "displayName": "NuGet feed name",
-      "description": "The display name for the NuGet feed in Nuget.config."
     }
   }
 }
