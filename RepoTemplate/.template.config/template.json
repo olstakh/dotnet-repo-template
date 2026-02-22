@@ -43,7 +43,7 @@
     "includeAnalyzers": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "true",
+      "defaultValue": "false",
       "displayName": "Include analyzer projects",
       "description": "If true, includes the CodeAnalysis folder with custom Roslyn analyzer and test projects."
     },
