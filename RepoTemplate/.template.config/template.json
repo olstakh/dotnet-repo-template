@@ -25,7 +25,7 @@
           ]
         },
         {
-          "condition": "(!IncludeAnalyzers)",
+          "condition": "(!includeAnalyzers)",
           "exclude": [
             "CodeAnalysis/**/*"
           ]
@@ -40,12 +40,20 @@
       "replaces": "TEMPLATE_DEFAULT_NAME",
       "defaultValue": "RenameMe"
     },
-    "IncludeAnalyzers": {
+    "includeAnalyzers": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "true",
+      "defaultValue": "false",
       "displayName": "Include analyzer projects",
       "description": "If true, includes the CodeAnalysis folder with custom Roslyn analyzer and test projects."
+    },
+    "feed": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "https://api.nuget.org/v3/index.json",
+      "replaces": "TEMPLATE_NUGET_FEED",
+      "displayName": "NuGet feed URL",
+      "description": "The NuGet package source feed URL to use in Nuget.config."
     }
   }
 }

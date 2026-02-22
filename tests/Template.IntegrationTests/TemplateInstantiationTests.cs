@@ -10,59 +10,23 @@ public sealed class TemplateInstantiationTests(TemplateFixture fixture) : IClass
     private readonly TempDirectory _tempDir = new();
 
     /// <summary>
-    /// Default template (with analyzers) should produce a buildable solution.
+    /// Default template (without analyzers) should produce a buildable solution.
     /// </summary>
     [Fact]
-    public async Task DefaultTemplate_WithAnalyzers_Builds()
+    public async Task DefaultTemplate_WithoutAnalyzers_Builds()
     {
-        var projectName = "TestWithAnalyzers";
+        var projectName = "TestDefaultNoAnalyzers";
         var outputDir = Path.Combine(_tempDir.Path, projectName);
 
-        // Instantiate the template.
+        // Instantiate the template with defaults.
         var newResult = await DotnetCli.RunAsync(
             $"new repo-template -n {projectName} -o \"{outputDir}\"");
         newResult.AssertSuccess("dotnet new failed");
 
-        // Verify CodeAnalysis folder exists.
-        Assert.True(
-            Directory.Exists(Path.Combine(outputDir, "CodeAnalysis")),
-            "CodeAnalysis folder should exist when IncludeAnalyzers is true (default).");
-
-        // Verify the slnx references the analyzer project.
-        var slnxContent = await File.ReadAllTextAsync(
-            Path.Combine(outputDir, $"{projectName}.slnx"),
-            TestContext.Current.CancellationToken);
-        Assert.Contains("CodeAnalysis", slnxContent);
-
-        // Init git so SourceLink/NBGV don't complain.
-        await InitGitRepo(outputDir);
-
-        // Build.
-        var buildResult = await DotnetCli.RunAsync(
-            $"build \"{outputDir}\" --configuration Release",
-            workingDirectory: outputDir);
-        buildResult.AssertSuccess("dotnet build failed for default template");
-    }
-
-    /// <summary>
-    /// Template without analyzers should produce a buildable solution
-    /// with no CodeAnalysis folder.
-    /// </summary>
-    [Fact]
-    public async Task Template_WithoutAnalyzers_Builds()
-    {
-        var projectName = "TestNoAnalyzers";
-        var outputDir = Path.Combine(_tempDir.Path, projectName);
-
-        // Instantiate the template without analyzers.
-        var newResult = await DotnetCli.RunAsync(
-            $"new repo-template -n {projectName} -o \"{outputDir}\" --IncludeAnalyzers false");
-        newResult.AssertSuccess("dotnet new failed");
-
-        // Verify CodeAnalysis folder does NOT exist.
+        // Verify CodeAnalysis folder does NOT exist (default is false).
         Assert.False(
             Directory.Exists(Path.Combine(outputDir, "CodeAnalysis")),
-            "CodeAnalysis folder should NOT exist when IncludeAnalyzers is false.");
+            "CodeAnalysis folder should NOT exist when includeAnalyzers is false (default).");
 
         // Verify the slnx does NOT reference the analyzer project.
         var slnxContent = await File.ReadAllTextAsync(
@@ -83,7 +47,91 @@ public sealed class TemplateInstantiationTests(TemplateFixture fixture) : IClass
         var buildResult = await DotnetCli.RunAsync(
             $"build \"{outputDir}\" --configuration Release",
             workingDirectory: outputDir);
-        buildResult.AssertSuccess("dotnet build failed for template without analyzers");
+        buildResult.AssertSuccess("dotnet build failed for default template");
+    }
+
+    /// <summary>
+    /// Template with analyzers explicitly enabled should produce a buildable solution
+    /// with a CodeAnalysis folder.
+    /// </summary>
+    [Fact]
+    public async Task Template_WithAnalyzers_Builds()
+    {
+        var projectName = "TestWithAnalyzers";
+        var outputDir = Path.Combine(_tempDir.Path, projectName);
+
+        // Instantiate the template with analyzers.
+        var newResult = await DotnetCli.RunAsync(
+            $"new repo-template -n {projectName} -o \"{outputDir}\" --include-analyzers");
+        newResult.AssertSuccess("dotnet new failed");
+
+        // Verify CodeAnalysis folder exists.
+        Assert.True(
+            Directory.Exists(Path.Combine(outputDir, "CodeAnalysis")),
+            "CodeAnalysis folder should exist when includeAnalyzers is true.");
+
+        // Verify the slnx references the analyzer project.
+        var slnxContent = await File.ReadAllTextAsync(
+            Path.Combine(outputDir, $"{projectName}.slnx"),
+            TestContext.Current.CancellationToken);
+        Assert.Contains("CodeAnalysis", slnxContent);
+
+        // Init git so SourceLink/NBGV don't complain.
+        await InitGitRepo(outputDir);
+
+        // Build.
+        var buildResult = await DotnetCli.RunAsync(
+            $"build \"{outputDir}\" --configuration Release",
+            workingDirectory: outputDir);
+        buildResult.AssertSuccess("dotnet build failed for template with analyzers");
+    }
+
+    /// <summary>
+    /// Custom --feed value should be reflected in the generated Nuget.config.
+    /// </summary>
+    [Fact]
+    public async Task Template_CustomFeed_IsApplied()
+    {
+        var projectName = "TestCustomFeed";
+        var outputDir = Path.Combine(_tempDir.Path, projectName);
+        var customFeed = "https://pkgs.dev.azure.com/myorg/_packaging/myfeed/nuget/v3/index.json";
+
+        // Instantiate the template with a custom feed.
+        var newResult = await DotnetCli.RunAsync(
+            $"new repo-template -n {projectName} -o \"{outputDir}\" --feed {customFeed}");
+        newResult.AssertSuccess("dotnet new failed");
+
+        // Verify Nuget.config contains the custom feed URL.
+        var nugetConfig = await File.ReadAllTextAsync(
+            Path.Combine(outputDir, "Nuget.config"),
+            TestContext.Current.CancellationToken);
+        Assert.Contains(customFeed, nugetConfig);
+        Assert.Contains("DefaultFeed", nugetConfig);
+
+        // Verify the default nuget.org feed is NOT present.
+        Assert.DoesNotContain("https://api.nuget.org/v3/index.json", nugetConfig);
+    }
+
+    /// <summary>
+    /// Default --feed value should produce nuget.org in Nuget.config.
+    /// </summary>
+    [Fact]
+    public async Task Template_DefaultFeed_IsNugetOrg()
+    {
+        var projectName = "TestDefaultFeed";
+        var outputDir = Path.Combine(_tempDir.Path, projectName);
+
+        // Instantiate the template with defaults.
+        var newResult = await DotnetCli.RunAsync(
+            $"new repo-template -n {projectName} -o \"{outputDir}\"");
+        newResult.AssertSuccess("dotnet new failed");
+
+        // Verify Nuget.config contains the default nuget.org feed.
+        var nugetConfig = await File.ReadAllTextAsync(
+            Path.Combine(outputDir, "Nuget.config"),
+            TestContext.Current.CancellationToken);
+        Assert.Contains("https://api.nuget.org/v3/index.json", nugetConfig);
+        Assert.Contains("DefaultFeed", nugetConfig);
     }
 
     /// <summary>
