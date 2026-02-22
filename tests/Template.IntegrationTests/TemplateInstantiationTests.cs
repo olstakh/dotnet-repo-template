@@ -26,7 +26,7 @@ public sealed class TemplateInstantiationTests(TemplateFixture fixture) : IClass
         // Verify CodeAnalysis folder exists.
         Assert.True(
             Directory.Exists(Path.Combine(outputDir, "CodeAnalysis")),
-            "CodeAnalysis folder should exist when IncludeAnalyzers is true (default).");
+            "CodeAnalysis folder should exist when includeAnalyzers is true (default).");
 
         // Verify the slnx references the analyzer project.
         var slnxContent = await File.ReadAllTextAsync(
@@ -56,13 +56,13 @@ public sealed class TemplateInstantiationTests(TemplateFixture fixture) : IClass
 
         // Instantiate the template without analyzers.
         var newResult = await DotnetCli.RunAsync(
-            $"new repo-template -n {projectName} -o \"{outputDir}\" --IncludeAnalyzers false");
+            $"new repo-template -n {projectName} -o \"{outputDir}\" --include-analyzers false");
         newResult.AssertSuccess("dotnet new failed");
 
         // Verify CodeAnalysis folder does NOT exist.
         Assert.False(
             Directory.Exists(Path.Combine(outputDir, "CodeAnalysis")),
-            "CodeAnalysis folder should NOT exist when IncludeAnalyzers is false.");
+            "CodeAnalysis folder should NOT exist when includeAnalyzers is false.");
 
         // Verify the slnx does NOT reference the analyzer project.
         var slnxContent = await File.ReadAllTextAsync(

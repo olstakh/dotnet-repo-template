@@ -30,12 +30,26 @@ cd MyAwesomeProject
 dotnet build
 ```
 
+### With a custom NuGet feed
+
+```bash
+dotnet new repo-template -n MyAwesomeProject --feed https://pkgs.dev.azure.com/myorg/_packaging/myfeed/nuget/v3/index.json --feed-name MyFeed
+```
+
+### Without analyzers
+
+```bash
+dotnet new repo-template -n MyAwesomeProject --include-analyzers false
+```
+
 ## Template Parameters
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `-n \| --name` | string | `RenameMe` | The name for the generated project, used to rename namespaces, projects, and solution files. |
-| `--IncludeAnalyzers` | bool | `true` | If true, includes the CodeAnalysis folder with custom Roslyn analyzer and test projects. |
+| `--include-analyzers` | bool | `true` | If specified, includes the CodeAnalysis folder with custom Roslyn analyzer and test projects. Use `--include-analyzers false` to exclude them. |
+| `--feed` | string | `https://api.nuget.org/v3/index.json` | The NuGet package source feed URL to use in Nuget.config. |
+| `--feed-name` | string | `NuGet.org` | The display name for the NuGet feed in Nuget.config. |
 
 This creates:
 - `MyAwesomeProject.slnx` - Solution file
